@@ -1,8 +1,12 @@
 function setup() {
-  createCanvas(1000, 1000);
-  background(220);
+  createCanvas(800, 800);
+  background(180);
 }
 
 function draw() {
   
+}
+
+function Character(sprite) {
+  this.sprite = sprite;
 }
