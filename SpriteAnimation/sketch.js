@@ -65,9 +65,9 @@ let girl;
 let ninja;
 
 function preload() {
-  spritesheetGuy = loadImage("sprites/SpelunkyGuy.png");
-  spritesheetGirl = loadImage("sprites/SpelunkyGirl.png");
-  spritesheetNinja = loadImage("sprites/SpelunkyNinja.png");
+  spritesheetGuy = loadImage("assets/SpelunkyGuy.png");
+  spritesheetGirl = loadImage("assets/SpelunkyGirl.png");
+  spritesheetNinja = loadImage("assets/SpelunkyNinja.png");
 }
 
 function setup() {
