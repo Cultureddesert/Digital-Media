@@ -4,6 +4,7 @@ class Creature {
     this.sprites = sprites;
     this.dx = x;
     this.dy = y;
+    this.scale = xdir;
     this.xDir = xdir;
     this.yDir = ydir;
     this.sx = 0;
@@ -13,33 +14,45 @@ class Creature {
     this.u = 0;
     this.v = 0;
     this.alive = 1;
-    this.walkAnimationLength = 9;
+    this.walkAnimationLength = 4;
     this.currentWalkFrame = 0;
   }
 
   walk(xval, yval) {
-    this.u = this.currentWalkFrame % this.walkAnimationLength;
-    this.dx += (xval * 1.5);
-    this.dy += (yval * 1.5);
-    //x movement limits
-    if (this.dx < (0 + this.sw / 2)) {
-      this.dx = 0 + this.sw / 2;
-      this.xDir = -1 * this.xDir;
-    } else if (this.dx > (800 - this.sw / 2)) {
-      this.dx = 800 - this.sw / 2;
-      this.xDir = -1 * this.xDir;
-    }
-    //y movement limits
-    if (this.dy < (0 + this.sh / 2)) {
-      this.dy = 0 + this.sh / 2;
-      this.yDir = -1 * this.yDir;
-    } else if (this.dy > (800 - this.sh / 2)) {
-      this.dy = 800 - this.sh / 2;
-      this.yDir = -1 * this.yDir;
-    }
-    //framerate of animation
-    if (this.frameCount % 6 == 0) {
-      this.currentWalkFrame ++;
+    if (this.alive) {
+      this.u = this.currentWalkFrame % this.walkAnimationLength;
+      this.dx += (xval * speed);
+      this.dy += (yval * speed);
+      //x movement limits
+      if (this.dx < (0 + this.sw / 2)) {
+        this.dx = 0 + this.sw / 2;
+        this.xDir = -1 * this.xDir;
+        this.yDir = yDirCalc();
+        this.scale = this.xDir;
+      } else if (this.dx > (800 - this.sw / 2)) {
+        this.dx = 800 - this.sw / 2;
+        this.xDir = -1 * this.xDir;
+        this.yDir = yDirCalc();
+        this.scale = this.xDir;
+      }
+      //y movement limits
+      if (this.dy < (0 + this.sh / 2)) {
+        this.dy = 0 + this.sh / 2;
+        this.yDir = -1 * this.yDir;
+        this.xDir = xDirCalc();
+        this.scale = this.xDir;
+      } else if (this.dy > (800 - this.sh / 2)) {
+        this.dy = 800 - this.sh / 2;
+        this.yDir = -1 * this.yDir;
+        this.xDir = xDirCalc();
+        this.scale = this.xDir;
+      }
+      //framerate of animation
+      if (this.frameCount % 6 == 0) {
+        this.currentWalkFrame ++;
+      }
+    } else {
+      this.u = 4;
     }
   }
 
@@ -50,7 +63,7 @@ class Creature {
     //character sprite
     push();
     translate(this.dx, this.dy);
-    scale(this.xDir, 1);
+    scale(this.scale, 1);
     image(this.sprites, 0, 0, 80, 80, this.u*this.sw, this.v*this.sh, this.sw, this.sh);
     pop();
 
@@ -67,6 +80,7 @@ let spritesheetBug;
 let bugs;
 let score;
 let timer;
+let speed = 1.5;
 
 function preload() {
   spritesheetBug = loadImage("assets/Bug.png");
@@ -123,6 +137,7 @@ function mousePressed() {
         bugs[i].xDir = 0;
         bugs[i].yDir = 0;
         score ++;
+        speed *= 2;
       }
     }
   }
