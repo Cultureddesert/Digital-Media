@@ -1,4 +1,4 @@
-class Character {
+class Creature {
   constructor (sprites, x, y) {
     this.frameCount = 0;
     this.sprites = sprites;
@@ -28,6 +28,7 @@ class Character {
     }
   }
 
+  //EDIT THIS OUT AS ITS A TARGET, NOT THE PC ANY MORE
   display() {
     //walking
     if (keyIsDown(LEFT_ARROW)) {
