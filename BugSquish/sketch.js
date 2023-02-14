@@ -12,6 +12,7 @@ class Creature {
     this.sh = 80;
     this.u = 0;
     this.v = 0;
+    this.alive = 1;
     this.walkAnimationLength = 9;
     this.currentWalkFrame = 0;
   }
@@ -74,9 +75,15 @@ function preload() {
 function setup() {
   createCanvas(800, 800);
   imageMode(CENTER);
+  textSize(32);
   score = 0;
   timer = 30;
   bugs = [new Creature(spritesheetBug, random(40, 760), random(40, 760), xDirCalc(), yDirCalc()),
+          new Creature(spritesheetBug, random(40, 760), random(40, 760), xDirCalc(), yDirCalc()),
+          new Creature(spritesheetBug, random(40, 760), random(40, 760), xDirCalc(), yDirCalc()),
+          new Creature(spritesheetBug, random(40, 760), random(40, 760), xDirCalc(), yDirCalc()),
+          new Creature(spritesheetBug, random(40, 760), random(40, 760), xDirCalc(), yDirCalc()),
+          new Creature(spritesheetBug, random(40, 760), random(40, 760), xDirCalc(), yDirCalc()),
           new Creature(spritesheetBug, random(40, 760), random(40, 760), xDirCalc(), yDirCalc()),
           new Creature(spritesheetBug, random(40, 760), random(40, 760), xDirCalc(), yDirCalc()),
           new Creature(spritesheetBug, random(40, 760), random(40, 760), xDirCalc(), yDirCalc()),
@@ -85,7 +92,40 @@ function setup() {
 
 function draw() {
   background(180);
-  bugs.display();
+  for (i in bugs) {bugs[i].display();}
+  drawWords("Score: " + score, 20, 80);
+  if (round(millis() / 1000) < timer) {
+    drawWords("Time left: " + (timer - round(millis() / 1000)), 20, 40);
+  } else {
+    drawWords("Time left: 0", 20, 40);
+    push();
+    textSize(75);
+    textAlign(CENTER);
+    drawWords("GAME OVER \nScore: " + score, 400, 400);
+    pop();
+  }
+}
+
+function drawWords(text1, x, y) {
+  fill(0);
+  text(text1, x, y);
+}
+
+function mousePressed() {
+  if (round(millis() / 1000) < timer) {
+    for (i in bugs) {
+      if (mouseX > bugs[i].dx - bugs[i].sw / 2 &&
+          mouseX < bugs[i].dx + bugs[i].sw / 2 &&
+          mouseY > bugs[i].dy - bugs[i].sh / 2 &&
+          mouseY < bugs[i].dy + bugs[i].sh / 2 &&
+          bugs[i].alive) {
+        bugs[i].alive = 0;
+        bugs[i].xDir = 0;
+        bugs[i].yDir = 0;
+        score ++;
+      }
+    }
+  }
 }
 
 function xDirCalc() {
