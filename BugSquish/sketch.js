@@ -59,16 +59,23 @@ class Creature {
 }
 
 let spritesheetBug;
-let bug;
+let bugs;
 
 function preload() {
   spritesheetBug = loadImage("assets/Bug.png");
 }
 
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(800, 800);
+  imageMode(CENTER);
+  bugs = [new Creature(spritesheetBug, random(40, 760), random(40, 760)),
+          new Creature(spritesheetBug, random(40, 760), random(40, 760)),
+          new Creature(spritesheetBug, random(40, 760), random(40, 760)),
+          new Creature(spritesheetBug, random(40, 760), random(40, 760)),
+          new Creature(spritesheetBug, random(40, 760), random(40, 760))]
 }
 
 function draw() {
-  background(220);
+  background(180);
+  bugs.display();
 }
