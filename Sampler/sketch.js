@@ -7,7 +7,10 @@ let pitchtf = false;
 
 function setup() {
   soundFormats('mp3');
-  metalpipe = loadSound('assets/metalpipe.mp3')
+  metalpipe = loadSound('assets/metalpipe.mp3');
+  omg = loadSound('assets/omg.mp3');
+  vineboom = loadSound('assets/vineboom.mp3');
+  huh = loadSound('assets/huh.mp3');
   createCanvas(800, 800);
   background(185);
 }
@@ -41,10 +44,10 @@ function mousePressed() {
   if (mouseX >= 70 && mouseX <= 730 && mouseY >= 250 && mouseY <= 350) { //sound play buttons
     if (mouseX <= 220) { //metalpipe
       metalpipe.play();
-    } else if (mouseX >= 240 && mouseX <= 390) { //sound 2
-      //playsound
-    } else if (mouseX >= 410 && mouseX <= 560) { //sound 3
-      //playsound
+    } else if (mouseX >= 240 && mouseX <= 390) { //omg
+      omg.play();
+    } else if (mouseX >= 410 && mouseX <= 560) { //huh
+      huh.play();
     } else if (mouseX >= 580) { //sound 4
       //playsound
     }
@@ -56,7 +59,7 @@ function mousePressed() {
       pitchtf = true;
       color5 = 'red';
     }
-  } else { //bass button
-    //playsound
+  } else { //boom
+    vineboom.play();
   }
 }
