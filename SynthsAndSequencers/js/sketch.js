@@ -1,3 +1,5 @@
+//youtube link: https://youtu.be/G_ClygWwI-Y
+
 let slider1;
 let slider2;
 
