@@ -23,6 +23,7 @@ function draw() {
 }
 
 function mousePressed() {
+  Tone.start();
   if (mouseX >= 0 && mouseX <= 1000 && mouseY >= 0 && mouseY <= 600) {
     if (!playing) {
       loop.start(0);
