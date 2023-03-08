@@ -19,7 +19,7 @@ function setup() {
 
 function draw() {
   background(185);
-  image(helo, 0, 0, 1000, 600, 0, 0, 1300, 900);
+  image(helo, 20, 0, 1000, 600, 0, 0, 1300, 900);
 }
 
 function mouseDragged() {
